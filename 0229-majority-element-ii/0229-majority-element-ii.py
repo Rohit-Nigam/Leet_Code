@@ -1,15 +1,11 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> List[int]:
-        nums.sort()
-        print(len(nums)//3)
-        res=[]
-        for i in range(len(nums)):
-            if len(res)==0 or res[-1]!=nums[i]:
-                count=0
-                for j in range(i,len(nums)):
-                    if nums[j]==nums[i]:
-                        count+=1
-                    if count>len(nums)//3:
-                        res.append(nums[i])
-                        break
+        mpp = {}
+        res = []
+        for i in nums:
+            if len(res)==2:
+                break
+            mpp[i] = mpp.get(i, 0) + 1
+            if mpp[i] > (len(nums) // 3) and i not in res:
+                res.append(i)
         return res
